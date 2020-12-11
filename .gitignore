@@ -1,0 +1,13 @@
+# CLIENT:
+
+# SERVER:
+
+# dependencies
+/server/node_modules
+
+# misc
+/server/.env
+/server/dbCards.js 
+
+# GLOBAL:
+

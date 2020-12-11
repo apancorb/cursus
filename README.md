@@ -18,7 +18,14 @@
 - [server.js](#server.js)
 - [helpers](#helpers)
 - [models](#models)
-- [web-scraping](#web-scraping) + [main.py](#main.py) + [universities](#universities) + [index.py](#index.py) + [umd](#umd) + [umd.py](#umd.py) + [umd-builder.py](#umd-builder.py)
+- [web-scraping](#web-scraping)
+  - [main.py](#main.py)
+  - [universities](#universities)
+    - [index.py](#index.py)
+    - [umd](#umd)
+      - [umd.py](#umd.py)
+      - [umd-builder.py](#umd-builder.py)
+
 </details>
 
 ---

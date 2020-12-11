@@ -13,7 +13,7 @@ const mongo_conection_url = undefined;
 
 /* MIDDLEWARES */
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
 
 /* console.log(process.env.DB_CONNECTION); */
 /* DB CONFIG */

@@ -6,8 +6,8 @@
 /server/node_modules
 
 # misc
-/server/.env
 /server/dbCards.js 
 
 # GLOBAL:
-
+.env
+__pycache__

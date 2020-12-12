@@ -36,8 +36,10 @@
 
 ## 💻 Server 💻
 
-- ### server.js
-  **Description:** main entry-point
+### server.js
+
+**Path:** /server/server.js
+**Description:** The server.js file is the entry point into the api, it configures application middleware, binds controllers to routes and starts the Express web server for the api.
 
 ---
 

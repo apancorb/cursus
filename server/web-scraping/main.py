@@ -1,10 +1,12 @@
 import sys
 
-import ...
+from universities.umd import umd
 
 def main(univ):
-
-
+    if univ == "umd":
+        ret = umd()
+    return ret 
+    
 
 # Start process
 if __name__ == '__main__':

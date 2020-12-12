@@ -2,13 +2,14 @@ import express from "express";
 import mongoose from "mongoose"; 
 import cors from "cors";
 import bodyParser from "body-parser";
-import "dotenv/config.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 import Cards from "./dbCards.js";
 
 /* APP CONFIG */
 const app = express();
-const port = process.env.PORT || 8003;
+const port = process.env.PORT || 8005;
 const mongo_conection_url = undefined;
 
 /* MIDDLEWARES */
@@ -42,7 +43,8 @@ app.get('/', (req, res) => res.status(200).send('It is working!'));
     });
 }); */
 
-
+/* WEB-SCRAPING DATA COLLECTION */
+import './helpers/ws.interval.js';
 
 /* LISTENER */
 app.listen(port, () => console.log(`listening on localhost: ${port}`));

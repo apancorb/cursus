@@ -1,15 +1,18 @@
 import sys
 
+from models.University import University
 from universities.umd import umd
 
-def main(univ):
-    if univ == "umd":
-        ret = umd()
-    return ret 
+def main(univID):
+    # create a Univ object and pass it to the correspondance script
+    uni = University()
+    if univID == "umd":
+        timeTook = umd(uni)
+    return uni.getCollegesID('202101'), timeTook
     
 
 # Start process
 if __name__ == '__main__':
-    univ = sys.argv[1] # get the corresponding univ from the system arguments
-    ret = main(univ) # run the script that corresponds to univ
-    print("And the updated dict iss:: ", ret)
+    univID = sys.argv[1] # get the corresponding univ from the system arguments 
+    ret = main(univID) # run the script that corresponds to univ
+    print("RESULT: ", ret)

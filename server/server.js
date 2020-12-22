@@ -1,5 +1,5 @@
-import express from "express";  
-import mongoose from "mongoose"; 
+import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
@@ -9,8 +9,8 @@ import Cards from "./dbCards.js";
 
 /* APP CONFIG */
 const app = express();
-const port = process.env.PORT || 8005;
-const mongo_conection_url = undefined;
+const port = process.env.PORT || 8000;
+const mongo_conection_url = "";
 
 /* MIDDLEWARES */
 app.use(bodyParser.json());
@@ -25,7 +25,7 @@ app.use(cors());
 }); */
 
 /* API ENDPOINTS */
-app.get('/', (req, res) => res.status(200).send('It is working!'));
+app.get("/", (req, res) => res.status(200).send("It is working!"));
 
 /* app.post('/tinder/card', (req, res) => {
     const dbCard = req.body;
@@ -43,8 +43,8 @@ app.get('/', (req, res) => res.status(200).send('It is working!'));
     });
 }); */
 
-/* WEB-SCRAPING DATA COLLECTION */
-import './helpers/ws.interval.js';
+/* START WEB-SCRAPING INETRVAL */
+import "./web-scraping/interval.js";
 
 /* LISTENER */
 app.listen(port, () => console.log(`listening on localhost: ${port}`));

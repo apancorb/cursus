@@ -5,9 +5,12 @@
 # dependencies
 /server/node_modules
 
-# misc
-/server/dbCards.js 
-
 # GLOBAL:
 .env
 __pycache__
+
+# antonio
+notes.js
+client
+test
+.vscode

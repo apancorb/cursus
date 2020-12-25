@@ -30,7 +30,7 @@ Contains the server side (backend) of cursus written in JavaScript and Python.
 #### server.js
 
 - **Path:** /server/server.js
-- **Dependencies:** "body-parser": "^1.19.0", "cors": "^2.8.5", "dotenv": "^8.2.0", "express": "^4.17.1","mongoose": "^5.11.7", "nodemon": "^2.0.6", "python-shell": "^2.0.3"
+- **Dependencies:** "cors": "^2.8.5", "dotenv": "^8.2.0", "express": "^4.17.1","mongoose": "^5.11.7", "nodemon": "^2.0.6", "python-shell": "^2.0.3"
 - **Description:** The server.js file is the entry point into the api, it configures application middleware, binds controllers to routes and starts the Express web server for the api.
 
 ### web-scraping

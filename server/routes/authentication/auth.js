@@ -13,12 +13,14 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   // validation of data received
   const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send({ error: error.details[0].message });
+  if (error) return res.status(403).send({ error: error.details[0].message });
 
   // checking if the email already exists in the db
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist)
-    return res.status(400).send({ error: "Email already exists!" });
+    return res
+      .status(409)
+      .send({ error: "The Email provided already exists!" });
 
   // hash the password
   const salt = await bcrypt.genSalt(10);
@@ -26,7 +28,6 @@ router.post("/register", async (req, res) => {
 
   // we create a new User document to be stored under Users in CursusDB
   const user = new User({
-    name: req.body.name,
     email: req.body.email,
     password: hashedPassword,
     university: req.body.university,
@@ -43,7 +44,7 @@ router.post("/register", async (req, res) => {
     res.header("auth-token", token).send({ success: token });
     /* res.send({ user: user._id }); */
   } catch (err) {
-    res.status(400).send({ error: err });
+    res.status(500).send({ error: err });
   }
 });
 
@@ -51,23 +52,23 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   // validation of data received
   const { error } = loginValidation(req.body);
-  if (error) return res.status(400).send({ error: error.details[0].message });
+  if (error) return res.status(403).send({ error: error.details[0].message });
 
   // checking if the email already exists in the db
   const user = await User.findOne({ email: req.body.email });
-  if (!user)
-    return res.status(400).send({ error: "Email or password does not exist!" });
+  if (!user) return res.status(404).send({ error: "Email does not exist!" });
 
   // checking if password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass) return res.status(400).send({ error: "Invalid password" });
+  if (!validPass) return res.status(401).send({ error: "Invalid password" });
 
   // create and sign a token
   const token = jwt.sign(
     { _id: user._id, university: user.university },
     process.env.SIGNATURE
   );
-  res.header("auth-token", token).send({ success: token });
+  console.log(token);
+  res.cookie("auth-token", token).send({ success: token });
 });
 
 router.get("/", verify, (req, res) => {

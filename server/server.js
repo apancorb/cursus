@@ -25,7 +25,7 @@ app.use(cors());
 app.use("/api/user", authRoute);
 
 /* API ENDPOINTS */
-app.get("/", (req, res) => res.status(200).send("It is working!"));
+app.get("/", (req, res) => res.status(200).send({ message: "It is working!" }));
 
 /* START WEB-SCRAPING INETERVAL */
 /* import "./web-scraping/interval.js"; */

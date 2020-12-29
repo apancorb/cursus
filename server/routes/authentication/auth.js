@@ -14,7 +14,6 @@ router.post("/register", async (req, res) => {
   // validation of data received
   const { error } = registerValidation(req.body);
   if (error) return res.status(403).send({ error: error.details[0].message });
-
   // checking if the email already exists in the db
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist)
@@ -41,8 +40,11 @@ router.post("/register", async (req, res) => {
       { _id: user._id, university: user.university },
       process.env.SIGNATURE
     );
-    res.header("auth-token", token).send({ success: token });
-    /* res.send({ user: user._id }); */
+    /*  The httpOnly: true setting means that the cookie can’t be 
+      read using JavaScript but can still be sent back to the server in HTTP requests.
+     Without this setting, an XSS attack could use document.cookie to get a list of 
+     stored cookies and their values. */
+    res.cookie("token", token, { httpOnly: true }).send({ token });
   } catch (err) {
     res.status(500).send({ error: err });
   }
@@ -67,17 +69,23 @@ router.post("/login", async (req, res) => {
     { _id: user._id, university: user.university },
     process.env.SIGNATURE
   );
-  console.log(token);
-  res.cookie("auth-token", token).send({ success: token });
+
+  /* res.cookie("auth-token", token).send({ success: token }); */
+  res.cookie("token", token, { httpOnly: true }).send({ token });
 });
 
+/* API endpoint that removes 'token' cookie and log's out the user */
+router.get("/clear", verify, (req, res) => {
+  try {
+    res.clearCookie("token").send({ message: "Cookie removed!" });
+  } catch (err) {
+    res.status(404).send({ err, message: "error removing the 'token' cookie" });
+  }
+});
+
+/* API endpoint to get check if the user has a 'token' cookie and a valid JWT */
 router.get("/", verify, (req, res) => {
-  /*   res.json({
-    posts: { title: "my first post", data: "only if auth u can see" },
-  }); */
-  // since in the verified middleware we set req.user to id we have access to the user for getting their data
   res.send(req.user);
-  // user findone id : req.user._id
 });
 
 export default router;

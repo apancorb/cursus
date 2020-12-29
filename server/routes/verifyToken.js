@@ -1,11 +1,12 @@
 import jwt from "jsonwebtoken";
 
 /* verification middleware to check if the user has logged in */
-export default function (req, res, next) {
-  // get the token from the header and check if it exists
-  const token = req.header("auth-token");
-  if (!token) return res.status(401).send("Access Denied");
 
+export default function verify(req, res, next) {
+  // get the token from the header and check if it exists
+  /* const token = req.header("authorization"); */
+  const token = req.cookies.token;
+  if (!token) return res.status(401).send("Access Denied");
   // verify the user and go to the next step
   try {
     // verified returns the payload of the JWT token
@@ -13,6 +14,7 @@ export default function (req, res, next) {
     req.user = verified;
     next();
   } catch (err) {
-    res.status(400).send({ error: "Invalid Token" });
+    console.log(err);
+    res.status(400).send({ error: "Invalid Token", message: err });
   }
 }

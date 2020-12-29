@@ -2,13 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import authRoute from "./routes/authentication/auth.js";
 
 /* APP CONFIG */
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 8001;
+const port = process.env.PORT || 8000;
 
 /* DB CONNECT */
 mongoose.connect(
@@ -19,6 +20,7 @@ mongoose.connect(
 
 /* MIDDLEWARES */
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 /* ROUTES MIDDLEWARES */

@@ -8,11 +8,14 @@ class University():
     def __str__(self) -> str:
         return str(self.univ)
 
+    def getObject(self):
+        return self.univ
+
     # Helper method to convert from regular time to military time using format: 05:48PM
     def regular_military_1(self, regular_time: str):
         try:
-            #%I is for regular time. %H is for 24 hr time, aka "military time"
-            #%p is for AM/PM
+            # %I is for regular time. %H is for 24 hr time, aka "military time"
+            # %p is for AM/PM
             military_hr, military_mim = datetime.strptime(regular_time, '%I:%M%p').strftime('%H:%M').split(':')
             return [int(military_hr), int(military_mim)]
         except Exception as err:
@@ -23,8 +26,8 @@ class University():
     # Helper method to convert from regular time to military time using format: 05:48 PM
     def regular_military_2(self, regular_time: str):
         try:
-            #%I is for regular time. %H is for 24 hr time, aka "military time"
-            #%p is for AM/PM
+            # %I is for regular time. %H is for 24 hr time, aka "military time"
+            # %p is for AM/PM
             military_hr, military_mim = datetime.strptime(regular_time, '%I:%M%p').strftime('%H:%M').split(':')
             return [int(military_hr), int(military_mim)]
         except Exception as err:

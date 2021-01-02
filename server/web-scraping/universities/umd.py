@@ -84,9 +84,26 @@ def umdSections(uni, termID, collegeID, classID) -> bool:
                 return False
             # get the needed info to a time to the section just added
             # we could put the following code in a separate function called umdTime() but hey
-            days = list(courses_days[i].find('span', {'class': 'section-days'}).text.strip())
+            _days = list(courses_days[i].find('span', {'class': 'section-days'}).text.strip())
+            # standarize the days list 
+            days = []
+            for j in range(len(_days)):
+                if _days[j] == 'T':
+                    if _days[j + 1] == 'u':
+                        days.append('T')
+                    if _days[j + 1] == 'h':
+                        days.append('R')
+                elif _days[j] == 'u' or _days[j] == 'h':
+                    continue
+                else:
+                    days.append(_days[j])
             start_time = courses_days[i].find('span', {'class': 'class-start-time'}).text.strip()
             end_time = courses_days[i].find('span', {'class': 'class-end-time'}).text.strip()
+            # add a zero in front to standarize the times correctly
+            if len(start_time) == 1:
+                start_time = '0' + start_time
+            if len(end_time) == 1:
+                end_time = '0' + end_time
             time = []
             time.append(uni.regular_military_1(start_time))
             time.append(uni.regular_military_1(end_time))
@@ -111,12 +128,12 @@ def umdClasses(uni, termID, collegeID) -> bool:
     for _class in classes:
         classID = _class.find('div', {'class': 'course-id'}).text
         className = _class.find('span', {'class': 'course-title'}).text
-        description = _class.find('div', {'class': 'approved-course-text'})
+        description = _class.find_all('div', {'class': 'approved-course-text'})
         # handle missing description 
         if description:
-            description = description.text # did some cnhanges w find all
+            description = description[-1].text  # did some cnhanges w find all
         else:
-            description = "description unavailable"
+            description = None
         # add the class to the uni object 
         if not uni.addClass(termID=termID, collegeID=collegeID, classID=classID, className=className, description=description):
             print(f"ERROR building colleges for umd -> termID: {termID}, collegeID: {collegeID}, classID: {classID}, className: {className}, description: {description}")

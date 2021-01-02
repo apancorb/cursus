@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-/* The user schema in CursusDB */
+/* The user schema for users in CursusDB */
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -26,4 +26,9 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("User", userSchema);
+// choose CursusDB
+const myDB = mongoose.connection.useDb("CursusDB");
+// Create the User collection (users)
+const User = myDB.model("User", userSchema);
+
+export default User;

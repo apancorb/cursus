@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 import authRoute from "./routes/authentication/auth.js";
+import scheduleRoute from "./routes/schedule/schedule.js";
 
 /* APP CONFIG */
 dotenv.config();
@@ -13,7 +14,7 @@ const port = process.env.PORT || 8000;
 
 /* DB CONNECT */
 mongoose.connect(
-  process.env.DB_CONNECTION,
+  process.env.CURSUSDB_CONNECTION,
   { useUnifiedTopology: true, useNewUrlParser: true },
   () => console.log("Connected to the Data Base!")
 );
@@ -25,6 +26,7 @@ app.use(cors());
 
 /* ROUTES MIDDLEWARES */
 app.use("/api/user", authRoute);
+app.use("/api/schedule", scheduleRoute);
 
 /* API ENDPOINTS */
 app.get("/", (req, res) => res.status(200).send({ message: "It is working!" }));

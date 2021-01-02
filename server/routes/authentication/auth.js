@@ -2,7 +2,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import User from "./../../model/User.js";
+import User from "../../models/User.js";
 import { registerValidation, loginValidation } from "./validation.js";
 
 import verify from "./../verifyToken.js";

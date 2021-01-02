@@ -13,7 +13,7 @@
                     {
                         classID: "CMSC131",
                         className: "Object-Oriented Programming I",
-                        description: "Introduction to programming and computer science...", # if no description, "description unavailable"
+                        description: "Introduction to programming and computer science...", # if no description, use None
                         sections: [
                             {
                                 sectionID: "0101",

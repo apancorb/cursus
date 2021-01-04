@@ -84,33 +84,34 @@ def umdSections(uni, termID, collegeID, classID) -> bool:
                 return False
             # get the needed info to a time to the section just added
             # we could put the following code in a separate function called umdTime() but hey
-            _days = list(courses_days[i].find('span', {'class': 'section-days'}).text.strip())
-            # standarize the days list 
-            days = []
-            for j in range(len(_days)):
-                if _days[j] == 'T':
-                    if _days[j + 1] == 'u':
-                        days.append('T')
-                    if _days[j + 1] == 'h':
-                        days.append('R')
-                elif _days[j] == 'u' or _days[j] == 'h':
-                    continue
-                else:
-                    days.append(_days[j])
-            start_time = courses_days[i].find('span', {'class': 'class-start-time'}).text.strip()
-            end_time = courses_days[i].find('span', {'class': 'class-end-time'}).text.strip()
-            # add a zero in front to standarize the times correctly
-            if len(start_time) == 1:
-                start_time = '0' + start_time
-            if len(end_time) == 1:
-                end_time = '0' + end_time
-            time = []
-            time.append(uni.regular_military_1(start_time))
-            time.append(uni.regular_military_1(end_time))
-            location = courses_days[i].find('span', {'class': 'class-room'}).text.strip()
-            if not uni.addTime(termID=termID, collegeID=collegeID, classID=classID, sectionID=sectionID, days=days, time=time, location=location):
-                print(f"ERROR building sections for umd -> termID: {termID}, collegeID: {collegeID}, classID: {classID}")
-                return False
+            try: 
+                rows = courses_days[i].find_all('div', {'class': 'row'})
+                for row in rows:
+                    _days = list(row.find('span', {'class': 'section-days'}).text.strip())
+                    # standarize the days list 
+                    days = []
+                    for j in range(len(_days)):
+                        if _days[j] == 'T':
+                            if _days[j + 1] == 'u':
+                                days.append('T')
+                            if _days[j + 1] == 'h':
+                                days.append('R')
+                        elif _days[j] == 'u' or _days[j] == 'h':
+                            continue
+                        else:
+                            days.append(_days[j])
+                    start_time = row.find('span', {'class': 'class-start-time'}).text.strip()
+                    end_time = row.find('span', {'class': 'class-end-time'}).text.strip()
+                    time = []
+                    time.append(uni.regular_military_1(start_time))
+                    time.append(uni.regular_military_1(end_time))
+                    regular_time = start_time + ' - ' + end_time
+                    location = row.find('span', {'class': 'class-room'}).text.strip()
+                    if not uni.addTime(termID=termID, collegeID=collegeID, classID=classID, sectionID=sectionID, days=days, regular_time=regular_time, time=time, location=location):
+                        print(f"ERROR building sections for umd -> termID: {termID}, collegeID: {collegeID}, classID: {classID}")
+                        return False
+            except:
+                 continue
         return True
     except:
         # no worries if it goes here it means that this class has no sections or it has no days!
@@ -132,6 +133,8 @@ def umdClasses(uni, termID, collegeID) -> bool:
         # handle missing description 
         if description:
             description = description[-1].text  # did some cnhanges w find all
+            if 'Prerequisite:' in description:
+                description = None
         else:
             description = None
         # add the class to the uni object 

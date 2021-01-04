@@ -23,11 +23,13 @@
                                 times: [
                                     {
                                         days: ["M", "W", "F"],
-                                        time: [[10, 10], [10, 50]], # for now the numbers can be of type int or str 
+                                        regular_time: "10:10am - 10:50am"
+                                        time: [[10, 10], [10, 50]], # numbers have to be type int
                                         location: "ONLINE"
                                     },
                                     {
                                         days: ["T", "R"],
+                                        regular_time: "3:15pm - 4:30pm"
                                         time: [[15, 15], [16, 30]],
                                         location: "ESJ 0224"
                                     },

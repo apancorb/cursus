@@ -151,7 +151,7 @@ class University():
             print(err)
             return False
     
-    def addTime(self, termID: str, collegeID: str, classID: str, sectionID: str, days: list, time: list, location: str) -> bool:
+    def addTime(self, termID: str, collegeID: str, classID: str, sectionID: str, days: list, regular_time: str, time: list, location: str) -> bool:
         try:
             termIndex = self.getIndexTerm(termID)
             if not isinstance(termIndex, int):
@@ -169,7 +169,7 @@ class University():
             if not isinstance(sectionIndex, int):
                 print(f"ERROR in adding time: Univ path you are currently trying to add => Univ -> termID: {termID} -> collegeID: {collegeID} -> classID: {classID} -> sectionID: {sectionID}")
                 return False
-            self.univ[termIndex]["colleges"][collegeIndex]["classes"][classIndex]["sections"][sectionIndex]["times"].append({"days": days, "time": time, "location": location})
+            self.univ[termIndex]["colleges"][collegeIndex]["classes"][classIndex]["sections"][sectionIndex]["times"].append({"days": days, "regular_time": regular_time, "time": time, "location": location})
             return True
         except Exception as err:
             print(f"ERROR adding section ({termID}, {collegeID}, {classID}, {sectionID}, {days}, {time}, {location}) to Univ object: ")

@@ -11,3 +11,4 @@ soup = BeautifulSoup(page.content, 'html.parser')
 # find the where the terms are 
 terms = soup.find(id='term-id-input')
 print(terms.prettify())
+print("hello world")

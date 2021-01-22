@@ -48,7 +48,7 @@ def wmuSections(uni, termID, collegeID, classID):
     try:
         course_table = soup.find_all('td')
         for index in range(1, len(course_table), 11):
-            if "CSCI 140" in course_table[index].text:
+            if termID in course_table[index].text:
                 sectionID = course_table[index - 1].text.strip()
                 profName = course_table[index + 3].text.strip()
                 totalSeats = course_table[index + 6].text.strip()

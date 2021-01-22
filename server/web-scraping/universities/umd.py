@@ -106,7 +106,13 @@ def umdSections(uni, termID, collegeID, classID) -> bool:
                     time.append(uni.regular_military_1(start_time))
                     time.append(uni.regular_military_1(end_time))
                     regular_time = start_time + ' - ' + end_time
-                    location = row.find('span', {'class': 'class-room'}).text.strip()
+                    location = None
+                    try:
+                        building = soup.find('span', {'class': 'building-code'}).text.strip()
+                        room = soup.find('span', {'class': 'class-room'}).text.strip()
+                        location = building + ' ' + room
+                    except:
+                        location = soup.find('span', {'class': 'class-room'}).text.strip()
                     if not uni.addTime(termID=termID, collegeID=collegeID, classID=classID, sectionID=sectionID, days=days, regular_time=regular_time, time=time, location=location):
                         print(f"ERROR building sections for umd -> termID: {termID}, collegeID: {collegeID}, classID: {classID}")
                         return False

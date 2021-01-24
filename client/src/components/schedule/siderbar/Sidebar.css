@@ -1,0 +1,84 @@
+.side-class {
+  margin: 0.5rem;
+  background: rgba(253, 253, 253, 0.945);
+  font-size: 1.1rem;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 1s ease;
+  height: 3.8rem;
+}
+
+.side-course {
+  width: 15rem;
+  margin-bottom: 1rem;
+  transition: all 1s ease;
+  cursor: pointer;
+}
+
+.side-main-course {
+  display: flex;
+  justify-content: space-between;
+}
+
+.side-left-course {
+  margin: 0.3rem;
+}
+
+.side-right-course {
+  display: flex;
+  justify-content: center;
+}
+
+.num-courses {
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.side-class li {
+  flex: 1;
+}
+
+.trash-btn,
+.complete-btn {
+  cursor: pointer;
+  padding: 1.1rem !important;
+  font-size: 1rem !important;
+  margin-right: 0.1rem !important;
+}
+.complete-btn {
+  background: hsl(165, 78%, 87%) !important;
+  background-size: 12rem !important;
+}
+.trash-btn {
+  background: rgb(250, 189, 189) !important;
+}
+.side-item {
+  padding: 0rem 0.5rem;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.terms-select {
+  text-align-last: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  width: 18rem;
+  height: 2.8rem;
+  font-size: large;
+  box-sizing: border-box;
+  border-radius: 82px;
+  border-color: grey;
+  border-width: thick;
+}
+
+.course-list {
+  margin-bottom: 10rem;
+  padding: 1rem;
+}

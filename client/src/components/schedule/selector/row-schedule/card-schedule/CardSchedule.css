@@ -1,0 +1,22 @@
+.paper-section {
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.main-section {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 0.5rem;
+}
+
+.right-section {
+  padding: 0.5rem;
+}
+
+.add-bttn-section {
+  color: rgb(39, 192, 39) !important;
+}
+
+.remove-bttn-section {
+  color: rgb(223, 39, 39) !important;
+}

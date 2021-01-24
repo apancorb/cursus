@@ -1,0 +1,22 @@
+/* .schedule {
+  color: black;
+  background-color: black;
+  height: 880px;
+  width: 1000px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 500px;
+  margin-bottom: 0px;
+} */
+
+.schedule-content-top {
+  display: flex;
+  justify-content: center;
+  margin: 1.5%;
+}
+
+.schedule-content-left {
+  padding: 20px;
+}

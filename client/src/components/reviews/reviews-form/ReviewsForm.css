@@ -1,0 +1,19 @@
+.create-review-bttn {
+  cursor: pointer;
+  color: #000;
+  outline: none;
+  border: none;
+  font-weight: 700;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin: 1.3rem;
+  padding-top: 0.5rem;
+  background-color: #e6e6e6;
+  padding-bottom: 0.5rem;
+}
+
+.create-review-bttn:hover {
+  color: #fff;
+  background-color: rgba(32, 226, 74, 0.884);
+  transition: all 0.2s;
+}

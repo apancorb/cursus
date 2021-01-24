@@ -1,0 +1,13 @@
+#schedulerContainer .dx-scheduler-navigator {
+  visibility: hidden;
+}
+
+/* Only this one actually hides the navigator but just keep them both */
+.dx-scheduler-navigator {
+  visibility: hidden;
+}
+
+/* This ones takes cares of all the header :) */
+.dx-scheduler-header {
+  visibility: hidden;
+}

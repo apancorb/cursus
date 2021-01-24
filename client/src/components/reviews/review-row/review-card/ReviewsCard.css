@@ -1,0 +1,26 @@
+.comment-paper {
+  padding: 0.5rem;
+}
+
+.review-comment {
+  margin: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.bttn-review-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.voting-review {
+  display: flex;
+  margin: 1rem;
+}
+
+.up {
+  color: green !important;
+}
+
+.down {
+  color: red !important;
+}

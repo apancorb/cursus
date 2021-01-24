@@ -1,0 +1,4 @@
+.reviews-nav {
+  display: flex;
+  justify-content: space-between;
+}

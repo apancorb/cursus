@@ -2,6 +2,7 @@ import sys
 
 from models.University import University
 from universities.umd import umd
+from universities.wmu import wmu
 
 from update import updateUniversity
 
@@ -12,6 +13,8 @@ def main(uniID: str):
     # build the University object using the appropiate script
     if uniID == "umd":
         timeTook = umd(uni)
+    if uniID == "wmu":
+        timeTook = wmu(uni)
     # update the document from the appropiate collection in UniversitiesDB
     if not updateUniversity(uniID, uni):
         return f"Failed to update {uniID} with {timeTook}"

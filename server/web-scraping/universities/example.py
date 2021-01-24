@@ -8,6 +8,11 @@ BASE_URL = 'https://app.testudo.umd.edu/soc/202101/CHEM/CHEM132V'
 page = requests.get(BASE_URL)
 # create soup object to scrape 'page'
 soup = BeautifulSoup(page.content, 'html.parser')
+<<<<<<< HEAD
+# find the where the terms are 
+terms = soup.find(id='term-id-input')
+print(terms.prettify())
+=======
 # find the where the terms are
 
 location = None
@@ -22,3 +27,4 @@ except:
 
 print(location)
 print("hello world")
+>>>>>>> d114a2e340176350160a28f3afb53acd515f2e29

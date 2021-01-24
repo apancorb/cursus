@@ -44,34 +44,43 @@ router.post("/register", async (req, res) => {
       read using JavaScript but can still be sent back to the server in HTTP requests.
      Without this setting, an XSS attack could use document.cookie to get a list of 
      stored cookies and their values. */
-    res.cookie("token", token, { httpOnly: true }).send({ token });
+    res
+      .cookie("token", token, { maxAge: 7000000000, httpOnly: true })
+      .send({ token });
   } catch (err) {
+    console.log("/register error: ", err);
     res.status(500).send({ error: err });
   }
 });
 
 /* API endpoint that registers a new user into the Data Base */
 router.post("/login", async (req, res) => {
-  // validation of data received
-  const { error } = loginValidation(req.body);
-  if (error) return res.status(403).send({ error: error.details[0].message });
+  try {
+    // validation of data received
+    const { error } = loginValidation(req.body);
+    if (error) return res.status(403).send({ error: error.details[0].message });
 
-  // checking if the email already exists in the db
-  const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(404).send({ error: "Email does not exist!" });
+    // checking if the email already exists in the db
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(404).send({ error: "Email does not exist!" });
 
-  // checking if password is correct
-  const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass) return res.status(401).send({ error: "Invalid password" });
+    // checking if password is correct
+    const validPass = await bcrypt.compare(req.body.password, user.password);
+    if (!validPass) return res.status(401).send({ error: "Invalid password" });
 
-  // create and sign a token
-  const token = jwt.sign(
-    { _id: user._id, university: user.university },
-    process.env.SIGNATURE
-  );
+    // create and sign a token
+    const token = jwt.sign(
+      { _id: user._id, university: user.university },
+      process.env.SIGNATURE
+    );
 
-  /* res.cookie("auth-token", token).send({ success: token }); */
-  res.cookie("token", token, { httpOnly: true }).send({ token });
+    res
+      .cookie("token", token, { maxAge: 7000000000, httpOnly: true })
+      .send({ token });
+  } catch (err) {
+    console.log("/login error: ", err);
+    res.status(400).send({ error: err });
+  }
 });
 
 /* API endpoint that removes 'token' cookie and log's out the user */
@@ -79,6 +88,7 @@ router.get("/clear", verify, (req, res) => {
   try {
     res.clearCookie("token").send({ message: "Cookie removed!" });
   } catch (err) {
+    console.log("/clear error: ", err);
     res.status(404).send({ err, message: "error removing the 'token' cookie" });
   }
 });

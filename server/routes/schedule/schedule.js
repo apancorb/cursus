@@ -15,6 +15,7 @@ router.get("/terms", verify, async (req, res) => {
     }
     res.status(200).send(terms);
   } catch (err) {
+    console.log("/terms error: ", err);
     res.status(404).send({ error: err });
   }
 });
@@ -31,6 +32,7 @@ router.get("/colleges", verify, async (req, res) => {
     }
     res.status(200).send(colleges);
   } catch (err) {
+    console.log("/colleges error: ", err);
     res.status(404).send({ error: err });
   }
 });
@@ -50,28 +52,9 @@ router.get("/classes", verify, async (req, res) => {
     }
     res.status(200).send(classes);
   } catch (err) {
+    console.log("/classes error: ", err);
     res.status(400).send({ error: err });
   }
 });
 
 export default router;
-
-/* colleges = await umd.find(
-            {},
-            { termID: req.body.termID, colleges: { collegeID: 1 } }
-          ); */
-/*       colleges = await umd.find(
-        {},
-        { colleges: { $elemMatch: { collegeName: { $exists: true } } } }
-      ); */
-/*       var myDocument = {
-        termID: req.body.termID,
-        "colleges.collegeID": "CMSC",
-      };
-      var myProjection = { "colleges.$": 1 };
-      colleges = await umd.find(myDocument, myProjection); 
-      var myDocument = {
-        termID: req.body.termID,
-        "colleges.collegeID": "CMSC",
-      };
-      var myProjection = { "colleges.$": 1 }; */

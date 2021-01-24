@@ -3,7 +3,7 @@
 # SERVER:
 
 # dependencies
-/server/node_modules
+node_modules
 
 # GLOBAL:
 .env
@@ -14,3 +14,5 @@ notes.js
 client
 test
 .vscode
+example.py
+zerver

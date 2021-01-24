@@ -7,6 +7,10 @@
 
 ---
 
+no voy a poner limit en reviews and comment per user
+no validation for adult content
+refreshing always takes to home page
+
 ## 📁 **Project Structure** 📁
 
 <details> <summary>Client</summary>

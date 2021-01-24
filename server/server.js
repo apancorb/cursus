@@ -5,7 +5,10 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 import authRoute from "./routes/authentication/auth.js";
+import homeRoute from "./routes/home/home.js";
 import scheduleRoute from "./routes/schedule/schedule.js";
+import reviewsRoute from "./routes/review/review.js";
+import bannerRoute from "./routes/banner/banner.js";
 
 /* APP CONFIG */
 dotenv.config();
@@ -13,13 +16,12 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 /* DB CONNECT */
-mongoose.connect(
-  process.env.CURSUSDB_CONNECTION,
-  { useUnifiedTopology: true, useNewUrlParser: true },
-  () => console.log("Connected to the Data Base!")
-);
+mongoose.connect(process.env.CURSUSDB_CONNECTION, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
 
-/* MIDDLEWARES */
+/* GLOBAL MIDDLEWARES */
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
@@ -27,9 +29,9 @@ app.use(cors());
 /* ROUTES MIDDLEWARES */
 app.use("/api/user", authRoute);
 app.use("/api/schedule", scheduleRoute);
-
-/* API ENDPOINTS */
-app.get("/", (req, res) => res.status(200).send({ message: "It is working!" }));
+app.use("/api/reviews", reviewsRoute);
+app.use("/api/home", homeRoute);
+app.use("/api/banner", bannerRoute);
 
 /* START WEB-SCRAPING INETERVAL */
 /* import "./web-scraping/interval.js"; */
